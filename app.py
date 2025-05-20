@@ -1,15 +1,18 @@
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
+import os
+
 app = Flask(__name__)
 # Load the model
 with open('model.pkl', 'rb') as f:
   model = pickle.load(f)
 
+version = os.environ.get("VERSION", "dev")
 
 @app.route('/')
 def home():
- return jsonify({'message': 'Sales Prediction API is running'})
+    return jsonify({'message': f'Sales Prediction API is running, version: {version}') 
 
 
 @app.route('/predict', methods=['POST'])
