@@ -1,21 +1,21 @@
 steps:
-  # - name: "gcr.io/cloud-builders/docker"
-  #   args:
-  #     [
-  #       "build",
-  #       "-t",
-  #       "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
-  #       ".",
-  #     ]
-  #   id: "Build Docker image"
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        ".",
+      ]
+    id: "Build Docker image"
 
-  # - name: "gcr.io/cloud-builders/docker"
-  #   args:
-  #     [
-  #       "push",
-  #       "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
-  #     ]
-  #   id: "Push to Artifact Registry"
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+      ]
+    id: "Push to Artifact Registry"
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "gcloud"
@@ -30,12 +30,11 @@ steps:
         "--region",
         "${_REGION}",
         "--images",
-        "app=us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "app=${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
         "--skaffold-file",
         "skaffold.yaml",
       ]
-# options:
-#   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 # substitutions:
 #   _SERVICE_NAME: cloud-run-app
