@@ -18,36 +18,22 @@ steps:
     id: "Push to Artifact Registry"
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: bash
-    env:
-      - "RELEASE_TIMESTAMP=$(date '+%Y%m%d-%H%M%S')"
+    entrypoint: "gcloud"
     args:
-      - -c
-      - |
-        gcloud deploy releases create release-$RELEASE_TIMESTAMP \
-          --delivery-pipeline cloud-run-arnab-ghosh-ml-sales-pipeline \
-          --region us-central1 \
-          --images app=us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA \
-          --skaffold-file skaffold.yaml
-
-  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-  #   entrypoint: "gcloud"
-  #   args:
-  #     [
-  #       "run",
-  #       "deploy",
-  #       "ml-sales-service-cloud-run-arnab-ghosh",
-  #       "--image",
-  #       "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
-  #       "--region",
-  #       "us-central1",
-  #       "--platform",
-  #       "managed",
-  #       "--allow-unauthenticated",
-  #       "--set-env-vars",
-  #       "VERSION=$SHORT_SHA",
-  #     ]
-  #   id: "Deploy to Cloud Run"
+      [
+        "deploy",
+        "releases",
+        "create",
+        "release-$BUILD_ID",
+        "--delivery-pipeline",
+        "cloud-run-arnab-ghosh-ml-sales-pipeline",
+        "--region",
+        "us-central1",
+        "--images",
+        "app=us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "--skaffold-file",
+        "skaffold.yaml",
+      ]
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
