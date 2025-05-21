@@ -1,4 +1,11 @@
 steps:
+  - name: gcr.io/cloud-builders/bash
+    id: "Set timestamp"
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        echo "RELEASE_TIMESTAMP=$(date '+%Y%m%d-%H%M%S')" >> /workspace/timestamp.env
   - name: "gcr.io/cloud-builders/docker"
     args:
       [
@@ -21,20 +28,38 @@ steps:
     entrypoint: "gcloud"
     args:
       [
-        "run",
         "deploy",
-        "ml-sales-service-cloud-run-arnab-ghosh",
-        "--image",
-        "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "releases",
+        "create",
+        "release-$RELEASE_TIMESTAMP",
+        "--delivery-pipeline",
+        "cloud-run-arnab-ghosh-ml-sales-pipeline",
         "--region",
         "us-central1",
-        "--platform",
-        "managed",
-        "--allow-unauthenticated",
-        "--set-env-vars",
-        "VERSION=$SHORT_SHA",
+        "--images",
+        "app=us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "--skaffold-file",
+        "skaffold.yaml",
       ]
-    id: "Deploy to Cloud Run"
+
+  # - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  #   entrypoint: "gcloud"
+  #   args:
+  #     [
+  #       "run",
+  #       "deploy",
+  #       "ml-sales-service-cloud-run-arnab-ghosh",
+  #       "--image",
+  #       "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+  #       "--region",
+  #       "us-central1",
+  #       "--platform",
+  #       "managed",
+  #       "--allow-unauthenticated",
+  #       "--set-env-vars",
+  #       "VERSION=$SHORT_SHA",
+  #     ]
+  #   id: "Deploy to Cloud Run"
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET

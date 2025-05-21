@@ -1,0 +1,13 @@
+apiVersion: skaffold/v3alpha1
+kind: Config
+metadata:
+  name: ml-sales-service-cloud-run-arnab-ghosh
+
+profiles:
+  - name: dev
+    manifests:
+      rawYaml:
+        - deploy-dev.yaml
+
+deploy:
+  cloudrun: {}
