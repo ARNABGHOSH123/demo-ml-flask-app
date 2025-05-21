@@ -23,4 +23,4 @@ metadata:
   name: dev
 description: Cloud Run development service
 run:
-  location: projects/$PROJECT_ID/locations/us-central1
+  location: us-central1
