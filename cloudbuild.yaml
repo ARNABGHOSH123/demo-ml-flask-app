@@ -4,7 +4,7 @@ steps:
       [
         "build",
         "-t",
-        "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
         ".",
       ]
     id: "Build Docker image"
@@ -13,7 +13,7 @@ steps:
     args:
       [
         "push",
-        "us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
       ]
     id: "Push to Artifact Registry"
 
