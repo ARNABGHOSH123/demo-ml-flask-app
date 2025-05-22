@@ -4,7 +4,7 @@ metadata:
   name: ml-sales-prediction
 build:
   artifacts:
-    - image: gcr.io/faa-gcp-training-14-kfa-0808/cloud-run-app
+    - image: gcr.io/faa-gcp-training-14-kfa-0808/ml-sales-app-arnab-ghosh
 deploy:
   cloudrun:
     projectid: faa-gcp-training-14-kfa-0808
