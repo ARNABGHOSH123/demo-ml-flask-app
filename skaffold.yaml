@@ -3,11 +3,17 @@ kind: Config
 metadata:
   name: ml-sales-service-cloud-run-arnab-ghosh
 
-profiles:
-  - name: dev
-    manifests:
-      rawYaml:
-        - deploy-dev.yaml
+build:
+  artifacts:
+    - image: app
 
 deploy:
-  cloudrun: {}
+  cloudRun: {}
+
+profiles:
+  - name: dev
+    deploy:
+      cloudRun: {}
+      kubectl:
+        manifests:
+          - deploy-dev.yaml
