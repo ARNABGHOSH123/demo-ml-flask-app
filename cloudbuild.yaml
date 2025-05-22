@@ -17,7 +17,7 @@ steps:
       ]
     id: "Push to Artifact Registry"
 
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     entrypoint: "bash"
     args:
       - "-c"
