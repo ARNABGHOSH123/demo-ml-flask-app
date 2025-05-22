@@ -6,7 +6,7 @@ build:
   artifacts:
     - image: gcr.io/faa-gcp-training-14-kfa-0808/cloud-run-app
 deploy:
-  cloudRun: # <-- note capital R
+  cloudrun: # <-- note capital R
     projectId: faa-gcp-training-14-kfa-0808
     region: us-central1
     serviceName: ml-sales-service-cloud-run-arnab-ghosh
