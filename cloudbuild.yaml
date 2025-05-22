@@ -18,16 +18,22 @@ steps:
     id: "Push to Artifact Registry"
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-    entrypoint: "bash"
+    entrypoint: "gcloud"
     args:
-      - "-c"
-      - |
-        gcloud deploy releases create release-$BUILD_ID \
-          --delivery-pipeline=cloud-run-arnab-ghosh-ml-sales-pipeline \
-          --region=${_REGION} \
-          --images=app=${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA \
-          --skaffold-file=skaffold.yaml \
-          --render-strategy=skaffold-native
+      [
+        "deploy",
+        "releases",
+        "create",
+        "release-$BUILD_ID",
+        "--delivery-pipeline",
+        "cloud-run-arnab-ghosh-ml-sales-pipeline",
+        "--region",
+        "${_REGION}",
+        "--images",
+        "app=${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "--skaffold-file",
+        "skaffold.yaml",
+      ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 # substitutions:
