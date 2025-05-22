@@ -7,3 +7,6 @@ spec:
     spec:
       containers:
         - image: ml-sales-app-arnab-ghosh-image
+          env:
+            - name: VERSION
+              value: "$SHORT_SHA"
