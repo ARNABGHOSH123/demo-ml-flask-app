@@ -19,8 +19,7 @@ steps:
 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     entrypoint: "gcloud"
-    args:
-      [
+    args: [
         "deploy",
         "releases",
         "create",
@@ -31,8 +30,8 @@ steps:
         "${_REGION}",
         "--images",
         "app=${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
-        "--skaffold-file",
-        "skaffold.yaml",
+        # "--skaffold-file",
+        # "skaffold.yaml",
       ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
