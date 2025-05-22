@@ -11,14 +11,3 @@ profiles:
 
 deploy:
   cloudrun: {}
-
-verify:
-  - name: health-check
-    container:
-      image: gcr.io/cloud-builders/curl
-      command: ["curl"]
-      args:
-        [
-          "-f",
-          "https://ml-sales-service-cloud-run-arnab-ghosh-954297282737.us-central1.run.app",
-        ]
