@@ -1,12 +1,12 @@
-apiVersion: skaffold/v3alpha1
+apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
-  name: ml-sales-service-cloud-run-arnab-ghosh
-
-profiles:
-  - name: dev
-    manifests:
-      rawYaml:
-        - service.yaml
-    deploy:
-      cloudrun: {}
+  name: ml-sales-prediction
+build:
+  artifacts:
+    - image: gcr.io/faa-gcp-training-14-kfa-0808/cloud-run-app
+deploy:
+  cloudrun:
+    projectId: faa-gcp-training-14-kfa-0808
+    region: us-central1
+    serviceName: ml-sales-service-cloud-run-arnab-ghosh
