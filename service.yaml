@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-        - image: app
+        - image: ml-sales-app-arnab-ghosh
           resources:
             limits:
               cpu: 1000m
