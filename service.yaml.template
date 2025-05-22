@@ -7,7 +7,3 @@ spec:
     spec:
       containers:
         - image: ml-sales-app-arnab-ghosh-image
-          resources:
-            limits:
-              cpu: 1000m
-              memory: 128Mi

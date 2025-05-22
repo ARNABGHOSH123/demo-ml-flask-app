@@ -17,7 +17,17 @@ steps:
       ]
     id: "Push to Artifact Registry"
 
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+  # Step 3: Generate service.yaml from template
+  - name: "bash"
+    entrypoint: "bash"
+    args:
+      - -c
+      - |
+        envsubst < service.yaml.template > service.yaml
+    env:
+      - SHORT_SHA=$SHORT_SHA
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "gcloud"
     args:
       [
@@ -34,5 +44,3 @@ steps:
       ]
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-# substitutions:
-#   _SERVICE_NAME: cloud-run-app
