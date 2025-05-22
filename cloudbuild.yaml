@@ -18,12 +18,12 @@ steps:
     id: "Push to Artifact Registry"
 
   # Step 3: Generate service.yaml from template
-  - name: "bash"
-    entrypoint: "bash"
+  - name: "alpine"
+    entrypoint: "sh"
     args:
       - -c
       - |
-        envsubst < service.yaml.template > service.yaml
+        apk add --no-cache gettext && envsubst < service.yaml.template > service.yaml
     env:
       - SHORT_SHA=$SHORT_SHA
 
