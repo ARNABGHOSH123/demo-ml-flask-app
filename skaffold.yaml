@@ -1,14 +1,13 @@
-apiVersion: skaffold/v3alpha1
+apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
   name: ml-sales-service-cloud-run-arnab-ghosh
 
-build:
-  artifacts:
-    - image: app
+profiles:
+  - name: dev
+    manifests:
+      rawYaml:
+        - deploy-dev.yaml
 
 deploy:
-  cloudrun:
-    projectId: faa-gcp-training-14-kfa-0808
-    region: us-central1
-    serviceName: ml-sales-service-cloud-run-arnab-ghosh
+  cloudrun: {}
