@@ -17,21 +17,29 @@ steps:
       ]
     id: "Push to Artifact Registry"
 
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: "gcloud"
     args:
       [
         "deploy",
         "releases",
         "create",
-        "release-$BUILD_ID",
-        "--delivery-pipeline",
-        "cloud-run-arnab-ghosh-ml-sales-pipeline",
+        "release-$SHORT_SHA",
+        "--image",
+        "${_REGION}-docker.pkg.dev/faa-gcp-training-14-kfa-0808/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
         "--region",
         "${_REGION}",
-        "--images",
-        "ml-sales-app-arnab-ghosh=${_REGION}-docker.pkg.dev/$PROJECT_ID/ml-sales-repo-arnab-ghosh/cloud-run-app:$SHORT_SHA",
+        "--delivery-pipeline",
+        "cloud-run-arnab-ghosh-ml-sales-pipeline",
+        "--platform",
+        "managed",
+        "--timeout",
+        "600s",
+        "--allow-unauthenticated",
+        "--set-env-vars",
+        "VERSION=$SHORT_SHA",
       ]
+
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
 # substitutions:
