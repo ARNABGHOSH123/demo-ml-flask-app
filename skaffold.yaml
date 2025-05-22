@@ -1,19 +1,13 @@
-apiVersion: skaffold/v2beta29
+apiVersion: skaffold/v4beta12
 kind: Config
-metadata:
-  name: ml-sales-service-cloud-run-arnab-ghosh
-
 build:
-  artifacts:
-    - image: app
-
+  tagPolicy:
+    gitCommit: {}
+  local: {}
+manifests:
+  rawYaml:
+    - deploy-dev.yaml
 deploy:
-  cloudRun: {}
-
-profiles:
-  - name: dev
-    deploy:
-      cloudRun: {}
-      kubectl:
-        manifests:
-          - deploy-dev.yaml
+  kubectl: {}
+  logs:
+    prefix: container
