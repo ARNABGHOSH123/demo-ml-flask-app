@@ -12,7 +12,7 @@ version = os.environ.get("VERSION", "dev")
 
 @app.route('/')
 def home():
-    return jsonify({'message': f'Sales Prediction API is running with all task 1, task 2 and task 3 completed, version : {version}'}) 
+    return jsonify({'message': f'Sales Prediction API is running with all task 1, task 2 and task 3 completed and is ready for canary deployment, version : {version}'}) 
 
 
 @app.route('/predict', methods=['POST'])
