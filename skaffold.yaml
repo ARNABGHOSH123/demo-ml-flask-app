@@ -3,11 +3,12 @@ kind: Config
 metadata:
   name: ml-sales-service-cloud-run-arnab-ghosh
 
-profiles:
-  - name: dev
-    manifests:
-      rawYaml:
-        - deploy-dev.yaml
+build:
+  artifacts:
+    - image: app
 
 deploy:
-  cloudrun: {}
+  cloudrun:
+    projectId: faa-gcp-training-14-kfa-0808
+    region: us-central1
+    serviceName: ml-sales-service-cloud-run-arnab-ghosh
