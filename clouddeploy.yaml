@@ -6,7 +6,7 @@ description: ML Sales pipeline for Dev with Canary rollout
 serialPipeline:
   stages:
     - targetId: dev
-      profiles: [dev]
+      profiles: []
       strategy:
         canary:
           runtimeConfig:
