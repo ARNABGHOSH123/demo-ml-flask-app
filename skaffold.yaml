@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta29
+apiVersion: skaffold/v4beta1 # or the latest supported version
 kind: Config
 metadata:
   name: ml-sales-prediction
@@ -6,7 +6,7 @@ build:
   artifacts:
     - image: gcr.io/faa-gcp-training-14-kfa-0808/cloud-run-app
 deploy:
-  cloudrun:
+  cloudRun: # <-- note capital R
     projectId: faa-gcp-training-14-kfa-0808
     region: us-central1
     serviceName: ml-sales-service-cloud-run-arnab-ghosh
