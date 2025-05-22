@@ -22,5 +22,3 @@ metadata:
 description: Cloud Run development service
 run:
   location: projects/faa-gcp-training-14-kfa-0808/locations/us-central1
-skaffoldProfiles:
-  - dev
